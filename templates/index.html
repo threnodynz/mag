@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<head>
+    <title>My Zoo</title>
+    <link rel="stylesheet" href="css/base.css" type="text/css" />
+    <link rel="stylesheet" href="css/theme.css" type="text/css" />
+</head>
+<body>
+
+    <div class="content">
+
+        <h1>My Zoo</h1>
+
+        <div class="text" id="zooTime">
+            <p>{{@SESSION.zoo.dateTime}} ZST (Zoo Standard Time)</p>
+        </div>
+
+        <button id="btnUpdate" onclick="window.location = 'elapse-time';">Trigger elapse time (1 Hr)</button>&nbsp;&nbsp;
+        <button id="btnFeed"  onclick="window.location = 'feed-animals';">Feed the Animals</button>
+        <hr/>
+
+        <F3:repeat value="{{@members}}" group="{{@SESSION.zoo.animals}}">
+        <table id="animals">
+            <tr>
+                <th>Animal</th>
+                <th>Health&nbsp;(%)</th>
+                <th class="center">State</th>
+            </tr>
+
+            <F3:repeat key="{{@index}}" value="{{@animal}}" group="{{@members}}">
+            <tr class="animal {{@animal->type}}" id="{{@animal->type . '_' . @index + 1}}">
+                <td class="name">
+                    {{@animal->type}}&nbsp;{{@index + 1}}
+                </td>
+
+                <td class="health">
+                    {{@animal->health}}
+                </td>
+
+                <td class="state">
+                    {{@animal->getFormattedState()}}
+                </td>
+            </tr>
+            </F3:repeat>
+
+        </table>
+        </F3:repeat>
+
+    </div>
+
+    <p/><p/>
+
+</body>
+</html>
